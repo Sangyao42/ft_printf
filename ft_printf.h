@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:33 by sawang            #+#    #+#             */
-/*   Updated: 2022/11/08 19:23:10 by sawang           ###   ########.fr       */
+/*   Updated: 2022/11/08 21:19:39 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FT_PRINTF_H
 # include <stdarg.h>
 # include <unistd.h>
-# include "libft/libft.h"
+// # include "libft/libft.h"
 
 int	ft_putchar(char c);
 int	ft_putstr(char *str);

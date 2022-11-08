@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:17:01 by sawang            #+#    #+#             */
-/*   Updated: 2022/11/08 19:25:58 by sawang           ###   ########.fr       */
+/*   Updated: 2022/11/08 21:23:10 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@ int	ft_putchar(char c)
 
 int	ft_putstr(char *str)
 {
+	int	i;
+
 	if (!str)
 		return (0);
-	write(1, str, ft_strlen(str));
-	return (ft_strlen(str));
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (i);
 }
