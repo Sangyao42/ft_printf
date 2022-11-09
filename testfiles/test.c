@@ -1,6 +1,7 @@
-#include "../ft_printf.h"
+#include "../src/ft_printf.h"
 #include <stdio.h>
 #include <limits.h>
+#include <stddef.h>
 
 
 int	main(void)
@@ -20,20 +21,29 @@ int	main(void)
 /**
  * testing for %c
 */
+	printf("testing for %%c:");
 	char str1[] = "%c\ntesting with specifier, length 36\n";
 	int i_char = ft_printf(str1, 'a');
 	printf("%d\n", i_char);
 
+	printf("\n");
 /**
  * testing for %s
 */
+	printf("testing for %%s:");
 	int	i_str = ft_printf("str %s has length 26.\n", "string");
 	printf("%d\n", i_str);
 	printf("@%d\n", printf("str %s has length 26.\n", "string"));
 
+	int	i_str_null = ft_printf("@%s\n", NULL);
+	printf("%d\n", i_str_null);
+	printf("%d\n", printf("@%s\n", NULL));
+
+	printf("\n");
 /**
  * testing for %i and %d
 */
+	printf("testing for %%i and %%d:");
 	int	i_int_basic = ft_printf("interger %i has length 28.\n", 987);
 	printf("%d\n", i_int_basic);
 
@@ -51,9 +61,12 @@ int	main(void)
 
 	int i_dec_intmin = ft_printf("min dec_nbr %d has length 38\n", -2147483648);
 	printf("%d\n", i_dec_intmin);
+
+	printf("\n");
 /**
  * testing for %u
 */
+	printf("testing for %%u:");
 	int	i_unsigned_basic = ft_printf("unsigned_int %u has length 32.\n", 987);
 	printf("%d\n", i_unsigned_basic);
 
@@ -77,9 +90,11 @@ int	main(void)
 
 	ft_printf("!%u\n", -1);
 
+	printf("\n");
 /**
  * testing for %x and %X
 */
+	printf("testing for %%x and %%X:\n");
 	ft_printf("%X\n", 33);
 	printf("return value: %d\n",printf("%X\n", 33));
 
@@ -87,7 +102,7 @@ int	main(void)
 	printf("return value: %d\n",printf("%X\n", -1));
 
 	ft_printf("%X\n", 4294967295);
-	printf("return value: %d\n",printf("%X\n", 4294967295));
+	printf("return value: %d\n",printf("%lX\n", 4294967295));
 	printf("!%X\n", UINT_MAX);
 
 	ft_printf("%X\n", 15);
@@ -97,13 +112,21 @@ int	main(void)
 	printf("return value: %d\n",printf("%X\n", 0));
 
 	ft_printf("%X\n", -2147483648);
-	printf("return value: %d\n",printf("%X\n", -2147483648));
+	printf("return value: %d\n",printf("%lX\n", -2147483648));
+	ft_printf("!@%X\n", (INT_MIN));
 
+	// ft_printf("%X\n", -2147483647);
+	// printf("return value: %d\n",printf("%X\n", -2147483647));
+	// printf("!%d\n", INT_MIN);
+	printf("!%X\n", INT_MIN);
+
+	printf("\n");
 /**
  * testing for %p
 */
-	int	*test;
-	int	*test2;
+	printf("testing for %%p:\n");
+	// int	*test;
+	// int	*test2;
 
 	int a = 1;
 	int b = 2;
@@ -118,17 +141,24 @@ int	main(void)
 	ft_printf("%p\n", &a);
 	ft_printf("%p\n", &b);
 
+	printf("\n");
 /**
  * testing for %%
 */
+	printf("testing for %%%%:\n");
 	ft_printf("%%\n");
+
+	ft_printf("\n");
 /**
  * testing for mixed
 */
+	printf("testing for mixed specifiers:\n");
 	int size_mixed_ft = ft_printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%\n", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42,0);
 	int size_mixed = printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%\n", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
 	printf("%d\n", size_mixed_ft);
 	printf("%d\n", size_mixed);
+
+	printf("\n");
 
 	return (0);
 }

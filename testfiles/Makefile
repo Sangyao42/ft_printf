@@ -4,28 +4,22 @@ CFLAGS = -Wall -Wextra -Werror
 TEST = test.c
 LIB = libftprintf.a
 SRC_DIR = ../src
-# MAKE = make
-# SRCS = ft_printf.c\
-#        print_addr.c\
-#        print_characters.c\
-#        print_numbers.c\
-# 	   spec_write.c
-# OBJS = $(SRCS:.c=.o)
+
+debug: CFLAGS += -g
+debug: all
 
 all: $(NAME)
-	./$(NAME)
 
-$(NAME): $(TEST) $(LIB)
-	$(CC) $(CFLAGS) $(TEST) -L./$(SRC_DIR) -lftprintf
+$(NAME): $(TEST) lib
+	$(CC) $(CFLAGS) $(TEST) -L./$(SRC_DIR) -lftprintf -o $(NAME)
 
-$(SRC_DIR)/$(LIB):
-	make -C $(SRC_DIR) re
+lib:
+	make -C $(SRC_DIR) all
 
 clean:
 	make -C $(SRC_DIR) fclean
 
 fclean: clean
 	rm -f $(NAME)
-
 
 re: fclean all
