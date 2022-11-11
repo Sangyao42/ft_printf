@@ -6,7 +6,7 @@
 /*   By: sawang <sawang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 14:00:40 by sawang            #+#    #+#             */
-/*   Updated: 2022/11/09 17:51:52 by sawang           ###   ########.fr       */
+/*   Updated: 2022/11/11 21:01:11 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@ int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		i;
-	int		spec_counter;
-	int		str_counter;
+	int		counter;
+	int		error;
 
-	spec_counter = 0;
-	str_counter = 0;
+	counter = 0;
+	error = 0;
 	va_start(args, format);
 	i = 0;
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			spec_counter += spec_write(args, format[i + 1]);
+			counter += spec_write(args, format[i + 1], &error);
 			i++;
 		}
 		else
-		{
-			write(1, &format[i], 1);
-			str_counter++;
-		}
+			counter += ft_putchar(format[i], &error);
 		i++;
 	}
-	return (spec_counter + str_counter);
+	va_end(args);
+	if (error < 0)
+		return (-1);
+	return (counter);
 }

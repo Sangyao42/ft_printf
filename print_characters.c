@@ -6,32 +6,37 @@
 /*   By: sawang <sawang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:17:01 by sawang            #+#    #+#             */
-/*   Updated: 2022/11/09 17:24:15 by sawang           ###   ########.fr       */
+/*   Updated: 2022/11/11 22:25:11 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+int	ft_putchar(char c, int *error)
 {
-	write(1, &c, 1);
+	if (*error < 0)
+	{
+		return (-1);
+	}
+	if (write(1, &c, 1) < 0)
+		*error = -1;
 	return (1);
 }
 
-int	ft_putstr(char *str)
+int	ft_putstr(char *str, int *error)
 {
 	int	i;
 
 	if (!str)
 	{
-		write(1, "(null)", 6);
+		if (write(1, "(null)", 6) < 0)
+			*error = -1;
 		return (6);
 	}
 	i = 0;
 	while (str[i])
-	{
-		write(1, &str[i], 1);
 		i++;
-	}
+	if (write(1, str, i) < 0)
+		*error = -1;
 	return (i);
 }

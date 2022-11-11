@@ -6,35 +6,25 @@
 /*   By: sawang <sawang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:24:47 by sawang            #+#    #+#             */
-/*   Updated: 2022/11/08 19:25:18 by sawang           ###   ########.fr       */
+/*   Updated: 2022/11/11 21:06:42 by sawang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	convert_ptr_to_hex(unsigned long n, int *spec_counter)
+static int	convert_ptr_to_hex(unsigned long n, int *error)
 {
 	char	*base;
 
 	base = "0123456789abcdef";
 	if (n >= 16)
-	{
-		convert_ptr_to_hex(n / 16, spec_counter);
-		convert_ptr_to_hex(n % 16, spec_counter);
-	}
-	else
-	{
-		ft_putchar(base[n % 16]);
-		(*spec_counter)++;
-	}
-	return (*spec_counter);
+		return (convert_ptr_to_hex(n / 16, error) + \
+		convert_ptr_to_hex(n % 16, error));
+	return (ft_putchar(base[n % 16], error));
 }
 
-int	ft_putptr(void *ptr, int *spec_counter)
+int	ft_putptr(void *ptr, int *error)
 {
-	int	size;
-
-	write(1, "0x", 2);
-	size = convert_ptr_to_hex((unsigned long)ptr, spec_counter);
-	return (2 + size);
+	return (ft_putstr("0x", error) + \
+	convert_ptr_to_hex((unsigned long)ptr, error));
 }
